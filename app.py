@@ -25,6 +25,7 @@ def get_token():
 
 # Automatically assign a parking spot to a new vehicle.
 @app.route('/parking', methods=['POST'])
+@authenticate_token
 def park_vehicle():
     data = request.get_json()
     vehicle_number = data['vehicle_number']
@@ -56,6 +57,7 @@ def park_vehicle():
 
 # Retrieve the parking spot number of a particular vehicle.
 @app.route('/parking/<string:vehicle_number>', methods=['GET'])
+@authenticate_token
 def get_parking_spot(vehicle_number):
     if vehicle_number in parking_lot:
         level = parking_lot[vehicle_number]['level']
