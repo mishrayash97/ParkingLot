@@ -5,5 +5,5 @@ parking_lot = {}
 LEVEL_A_SPOTS = list(range(1, 21))
 LEVEL_B_SPOTS = list(range(21, 41))
 
-#next level
-level = 'A'
+# secret key for JWT authentication.
+JWT_SECRET = 'mysecret'

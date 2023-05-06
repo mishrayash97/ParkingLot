@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
 import jwt
+from data_access import JWT_SECRET
 
 # Decorator for JWT authentication.
 def authenticate_token(func):
@@ -9,7 +10,9 @@ def authenticate_token(func):
             return jsonify({'message': 'Authorization header is missing.'}), 401
         token = auth_header.split(' ')[1]
         try:
-            payload = jwt.decode(token, JWT_SECRET)
+            payload = jwt.decode(token, JWT_SECRET, algorithms='HS256')
+            print("payload decoded:")
+            print(payload)
         except jwt.ExpiredSignatureError:
             return jsonify({'message': 'Token has expired.'}), 401
         except jwt.InvalidTokenError:
